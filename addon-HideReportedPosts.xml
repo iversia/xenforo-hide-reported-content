@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="HideReportedPosts" title="Auto Hide Reported Posts by Iversia" version_string="1.0.0" version_id="100" url="http://iversia.com" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="option_list_option_textbox_acsingle"><![CDATA[<xen:textboxunit label="{$preparedOption.title}" name="{$fieldPrefix}[{$preparedOption.option_id}]" value="{$preparedOption.option_value}"
+hint="{$formatParams.hint}" placeholder="{xen:phrase user_name}..." type="{$formatParams.type}" size="{$formatParams.size}" maxlength="{$formatParams.maxlength}" rows="{$formatParams.rows}" inputclass="Elastic AutoComplete AcSingle" type="search">
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+	<xen:html>
+		<xen:include template="option_list_option_editlink" />
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+</xen:textboxunit>]]></template>
+  </admin_templates>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_model" execute_order="10" callback_class="Iversia_HideReportedPosts_Listener" callback_method="loadClassModel" active="1" hint="" description=""/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups>
+    <option option_id="HideReportedPostsThreshold" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params>min=0</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="discourager" display_order="525"/>
+    </option>
+    <option option_id="HideReportedPostsThresholdUser" edit_format="template" data_type="string" can_backup="1">
+      <default_value></default_value>
+      <edit_format_params>option_list_option_textbox_acsingle</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="discourager" display_order="528"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="option_HideReportedPostsThreshold" version_id="100" version_string="1.0.0"><![CDATA[Report Threshold]]></phrase>
+    <phrase title="option_HideReportedPostsThresholdUser" version_id="100" version_string="1.0.0"><![CDATA[Moderator Username]]></phrase>
+    <phrase title="option_HideReportedPostsThresholdUser_explain" version_id="100" version_string="1.0.0"><![CDATA[The username of the account you wish to have notify the user when their reported content hits the threshold. The alert will use their avatar.]]></phrase>
+    <phrase title="option_HideReportedPostsThreshold_explain" version_id="100" version_string="1.0.0"><![CDATA[The number of unique reports a post/profile post/thread needs to get before it is sent to the moderation queue. (0 = disabled)]]></phrase>
+    <phrase title="your_post_in_thread_x_hit_threshold" version_id="100" version_string="1.0.0"><![CDATA[Your post in the thread {title} has hit the report threshold and is now under review.]]></phrase>
+    <phrase title="your_profile_post_hit_threshold" version_id="100" version_string="1.0.0"><![CDATA[Your <a href="{link}" class="PopupItemLink">profile post</a> has hit the report threshold and is now under review.]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates>
+    <template title="alert_post_report_threshold" version_id="100" version_string="1.0.0"><![CDATA[{xen:phrase your_post_in_thread_x_hit_threshold,
+'title=<a href="{$extra.link}" class="PopupItemLink">{$extra.title}</a>'}]]></template>
+    <template title="alert_profile_post_report_threshold" version_id="100" version_string="1.0.0"><![CDATA[{xen:phrase your_profile_post_hit_threshold,
+'link={$extra.link}'}]]></template>
+  </templates>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
