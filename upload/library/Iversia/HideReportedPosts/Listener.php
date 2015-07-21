@@ -3,14 +3,15 @@
 class Iversia_HideReportedPosts_Listener
 {
 
-    public static function loadClassModel($class, array &$extend)
+    /**
+     * Called when instantiating a class. This event can be used to extend the class that will be instantiated
+     * dynamically.
+     *
+     * @param $class
+     * @param array $extend
+     */
+    public static function load_class($class, array &$extend)
     {
-        static $classes = array(
-            'XenForo_Model_Report',
-        );
-
-        if (in_array($class, $classes)) {
-            $extend[] = str_replace('XenForo_', 'Iversia_HideReportedPosts_Extend_', $class);
-        }
+        $extend[] = str_replace('XenForo_', 'Iversia_HideReportedPosts_Extend_', $class);
     }
 }
