@@ -32,6 +32,7 @@ Configuration
 ------------
 
 1. Configure the add-on: `Home > Options > User Discouragement and Discipline`.
+2.  Set the Group Permission "Reports contribute to auto-moderate threshold" in  `Users > User Group Permissions`.
 
 Copyright / License
 ------------
